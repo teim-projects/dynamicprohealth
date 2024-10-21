@@ -1,0 +1,662 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: white;
+}
+
+
+/* Header */
+header {
+background-color: white;
+color: black; /* Change text color to black for better contrast */
+padding: 5px 20px; /* Adjust padding as needed */
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: fixed; /* Fix the header to the top */
+top: 0;
+left: 0;
+width: 100%; /* Make sure it spans the full width of the viewport */
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Bottom shadow for the header */
+z-index: 1000; /* Ensure the header is above other content */
+}
+
+.header-logo {
+display: flex;
+align-items: center;
+}
+
+.logo-image {
+max-height: auto; /* Adjust the height as needed */
+width: 110px;
+margin-left: 50px
+}
+
+nav {
+flex: 1; /* Allow the nav to take up remaining space */
+display: flex;
+justify-content: center; /* Center the nav items */
+}
+
+nav ul {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+}
+
+nav ul li {
+margin: 0 15px; /* Add horizontal spacing between items */
+display: flex;
+align-items: center;
+}
+
+/* Base styles for navigation links */
+nav ul li a {
+    color: #156F7A;
+    text-decoration: none;
+    font-size: 16px;
+    position: relative; /* Needed for the ::after pseudo-element */
+    transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+nav ul li a:hover {
+    color: #E49125;
+    box-shadow: 1px 5px 18px rgba(233, 145, 37, 0.1); /* Orange shadow */
+}
+
+/* Underline animation */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #E49125; /* Orange underline */
+    transition: width 0.3s ease;
+}
+
+/* Expand underline on hover */
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+
+.auth-buttons {
+    display: flex;
+    gap: 25px;
+    margin-left: 250px;
+    margin-right: -250px;
+}
+
+.auth-buttons .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #156F7A;
+    background-color: transparent;
+    border: 1px solid #156F7A;
+    font-size: 16px;
+}
+
+
+
+.auth-buttons .login-btn {
+    border-color: #156F7A;
+}
+
+.auth-buttons .signup-btn {
+    border-color: #156F7A;
+}
+
+/* Button base styles */
+.btn {
+    color: #156F7A; /* Initial text color */
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid #156F7A; /* Border color */
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: bold;
+    background: transparent;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Button hover effect */
+.btn:hover {
+    color: white; /* Text color on hover */
+}
+
+/* Button hover background */
+.btn::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0;
+    left: 0; /* Adjusted to align with the button */
+    transform: skewX(45deg);
+    background-color: #E49125; /* Background color on hover */
+    z-index: -1;
+    transition: all 1s;
+}
+
+.btn:hover::before {
+    width: 200%; /* Adjusted to cover more area */
+}
+
+/* Ensure button text is on top of the background */
+.btn {
+    z-index: 1;
+    border-radius: 5px;
+    /* Ensure text is above pseudo-element */
+}
+
+
+/* Base button styles */
+.btn {
+color: #156F7A; /* Initial text color */
+text-transform: uppercase;
+text-decoration: none;
+border: 2px solid #156F7A; /* Border color */
+padding: 10px 20px;
+font-size: 17px;
+font-weight: bold;
+background: transparent;
+position: relative;
+transition: all 1s;
+overflow: hidden;
+display: inline-block;
+}
+
+/* Button hover effect */
+.btn:hover {
+color: white; /* Text color on hover */
+}
+
+/* Button hover background */
+.btn::before {
+content: '';
+position: absolute;
+height: 100%;
+width: 0%;
+top: 0;
+left: -40px;
+transform: skewX(45deg);
+background-color: #E49125; /* Background color on hover */
+z-index: -1;
+transition: all 0.8s;
+}
+
+.btn:hover::before {
+width: 160%;
+}
+
+
+/* Hero Section */
+.hero {
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+color: black;
+text-align: center;
+padding: 100px 20px;
+position: relative;
+}
+
+
+.hero h1 {
+    font-size: 38px;
+    margin: 0;
+    padding: 0;
+    transition: opacity 0.3s ease;
+    color: #156F7A;
+}
+
+.hero p {
+    font-size: 20px;
+    margin: 10px 0 20px;
+    transition: opacity 0.3s ease;
+}
+
+/* Image Carousel */
+        
+.carousel {
+    position: relative;
+    max-width: 100%;
+    height: 1000px;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    margin-top: 30px;
+}
+
+.carousel-item {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 845px;
+    object-fit: cover; 
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.carousel-caption h3 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #fff;
+   margin-bottom: -20px;
+}
+
+.carousel-caption p {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+
+.carousel-arrow {
+    background-color:#E49125;
+    color: #156F7A;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    transition: background-color 0.3s;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow.left {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.carousel-arrow.right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+
+.carousel-item {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.carousel-caption h3 {
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #156F7A;
+}
+
+.carousel-caption p {
+    font-size: 2.2em;
+    color: #E49125;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+
+
+.carousel-caption .btn {
+    background-color: transparent;
+    border-color: #156F7A;
+    color: #fff;
+    margin-top: 20px;
+    border-radius: 5px;
+
+}
+
+
+
+
+
+
+
+/* Introduction Section */
+.intro {
+    position: relative; /* Establish positioning context for the pseudo-element */
+    background-image: url('/static/images/fitness.png');
+    background-size: cover; /* Cover the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    padding: 100px 20px;
+    text-align: center;
+    color: white; /* Text color to contrast with the overlay */
+}
+
+.intro::before {
+    content: ''; /* Required to display the pseudo-element */
+    position: absolute; /* Position the overlay over the image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 50% opacity */
+    z-index: 1; /* Ensure the overlay is above the background image */
+}
+
+.intro p, .intro a {
+    position: relative; /* Ensure text and buttons are above the overlay */
+    z-index: 2;
+}
+
+
+
+.intro p {
+    color: white;
+    font-size: 30px;
+    margin: 0;
+    line-height: 1.8;
+    font-weight: 700;
+    
+}
+.intro .btn{
+    margin-top: 20px;
+    border-radius: 5px;
+
+
+}
+.intro .btn {
+    color: #156F7A; /* Text color on hover */
+    background-color: white;
+    border: solid 2px #156F7A;
+    border-radius: 5px;
+
+}
+.intro .btn:hover {
+    color: white;
+    border: solid 3px white; /* Text color on hover */
+}
+
+
+
+
+/* Services Section */
+.services {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 38px;
+    margin: 0 0 20px;
+    color: #156F7A;
+}
+
+.service-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 580px;
+    height: 400px;
+    /* border-radius: 10px; */
+    margin-left: 40px;
+    margin-right: 40px;
+    
+    background: #e0e0e0;
+    /* box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff; */
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* Card Heading */
+.card-heading {
+    background-color: #156F7A;
+    color: #E49125;
+    text-align: center;
+    padding: 5px;
+    font-size: 28px;
+    
+    font-weight: bold;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+/* Image Inside the Card */
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+/* Overlay Content on Hover */
+.card-content {
+    position: absolute;
+    top: 100%; /* Start from bottom (outside the card) */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(21, 111, 122, 0.7); /* Apply color with opacity */
+    color: #fff;
+    opacity: 1;
+    transition: opacity 2s ease, top 0.5s ease; /* 2s transition for opacity and position */
+    text-align: center;
+    padding-top: 50px; /* Adjust to position text below the heading */
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-5px);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}
+
+/* Show Content on Hover */
+.card:hover .card-content {
+    opacity: 1;
+    top: 0; /* Move to the top of the card */
+}
+
+/* Content Styling */
+.card-content h3 {
+    font-size: 38px;
+    color: #E49125;
+    margin-bottom: 20px;
+   
+}
+
+.card-content p {
+    font-size: 18px;
+    color: #fff;
+}
+
+.services .btn{
+    margin-top: 40px;
+    background-color: white
+}
+
+.service-item {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+.testimonials {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #F9F9F9;
+}
+
+.testimonials h2 {
+    font-size: 38px;
+    margin: 0 0 20px;
+    color: #156F7A;
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 200px;
+    height: 260px;
+    perspective: 1000px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: sans-serif;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+    box-shadow: 0 28px 20px 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid #156F7A; /* Changed to #156F7A */
+    border-radius: 1rem;
+}
+
+.flip-card-front {
+    background: linear-gradient(120deg, #1b8391 40%, #007e9a 60%);
+    color: white;
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+.flip-card-back {
+    background: #156F7A;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.flip-card-back p {
+    margin: 10px 0;
+    color: white; /* Ensure text is white */
+}
+
+.client-name {
+    font-weight: bold;
+    color: #156F7A; /* Changed to #156F7A */
+}
+
+
+/* Footer */
+footer {
+    background-color: #156F7A;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+footer ul li {
+    margin: 0 10px;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: #E49125;
+}
+
+footer .social-media {
+    margin-top: 10px;
+}
+
+footer p {
+    margin: 10px 0 0;
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '\css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static '\images' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-image: url("{% static 'images/admin_login_background.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .box {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            margin: auto;
+            background: transparent;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .box input[type="text"],
+        .box input[type="password"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #3498db;
+            padding: 10px 10px;
+            width: 80%;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+
+        .box h1 {
+            color: white;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .box input[type="submit"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            border: 2px solid #2ecc71;
+            padding: 14px 40px;
+            outline: none;
+            color: white;
+            border-radius: 24px;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+        .box input[type="submit"]:hover {
+            background: #2ecc71;
+        }
+
+        .login-link {
+            color: white;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #2ecc71;
+            text-decoration: none;
+        }
+
+        header {
+            background-color: white;
+            color: black;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 110px;
+            margin-left: 50px;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #156F7A;
+            text-decoration: none;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #E49125;
+            box-shadow: 1px 5px 18px rgba(233, 145, 37, 0.1);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #156F7A;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                display: none;
+                padding: 10px 0;
+                z-index: 999;
+            }
+
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box input[type="text"],
+            .box input[type="password"] {
+                width: 90%;
+            }
+
+            .box input[type="submit"] {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+    <title>User Login</title>
+</head>
+<body>
+    <header>
+        <div class="header-logo">
+            <a href="/"><img src="{% static 'images/logo.png' %}" alt="Dynamic Prohealth Logo" class="logo-image"></a>
+        </div>
+        <nav>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-6">
+                <div class="card" style="background-color: transparent;">
+                    <form class="box" method="POST">
+                        {% csrf_token %}
+                        <h1 style="font-weight: 100;">Login</h1>
+                        <p style="color: white;">Please enter your <span style="color: #2ecc71;">Username</span> and <span style="color: #2ecc71;">Password</span></p>
+                        <input type="text" name="uname" placeholder="Username">
+                        <input type="password" name="upass" placeholder="Password">
+                        <input type="submit" value="Submit">
+                        <div class="col-md-12">
+                            <p style="color: red;">{{msg1}}</p>
+                            <p class="login-link">Don't Have Account? <a href="/signup">Signup</a></p>
+                            <p class="login-link">Login as <a href="/technician_login">User</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>

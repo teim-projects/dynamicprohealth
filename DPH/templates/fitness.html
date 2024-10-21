@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Services</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Sidebar CSS (Reuse from previous templates) */
+        .sidebar {
+            width: 250px;
+            background-color: #def0f0;
+            color: #156F7A;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        /* Sidebar Links */
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #156F7A;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: none;
+            background-color: #156F7A;
+            color: #E49125;
+        }
+
+        /* Main Content */
+        .container {
+            margin-left: 270px; /* Ensure content is pushed to the right of the sidebar */
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+            color: #156F7A;
+        }
+
+        table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn {
+            background-color: #E49125;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #156F7A;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href=""><img src="{% static 'images/logo.png' %}" alt="Dynamic Prohealth Logo" class="logo-image"></a>
+        <ul>
+            <li><a href="{% url 'customer_manage_profile' %}">Manage Profile</a></li>
+            <li><a href="{% url 'health_services' %}">Health</a></li>
+            <li><a href="{% url 'diet_services' %}">Diet</a></li>
+            <li><a href="{% url 'fitness_services' %}">Fitness</a></li>
+            <li><a href="{% url 'customer_book_appointments' %}">Book Appointments</a></li>
+            <li><a href="{% url 'customer_make_payments' %}">Make Payments</a></li>
+            <li><a href="{% url 'customer_submit_reviews' %}">Submit Reviews</a></li>
+        </ul>
+    </aside>
+    <div class="container">
+        <h1>Fitness Services</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Service Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr>
+                    <td>{{ service.service_name }}</td>
+                    <td>{{ service.description }}</td>
+                    <td>Rs.{{ service.price }}</td>
+                    <td>
+                        {{ service.duration_hours }} hours 
+                        {{ service.duration_minutes }} minutes
+                    </td>
+                    <td>
+                        <a href="{% url 'book_appointment' service.id %}" class="btn">Book Appointment</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No services available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

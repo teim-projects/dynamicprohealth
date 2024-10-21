@@ -1,0 +1,281 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header with Logo and Hamburger */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: white;
+            color: #156F7A;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .header .logo {
+            height: 50px;
+        }
+
+        .hamburger {
+            font-size: 50px;
+            cursor: pointer;
+            color: #156F7A;
+            display: none;
+            margin-right: 50px;
+        }
+
+        /* Sidebar for Desktop */
+        .dashboard-container {
+            display: flex;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #def0f0;
+            color: #156F7A;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #156F7A;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #156F7A;
+            color: #E49125;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 20px;
+            flex-grow: 1;
+            margin-left: 270px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-section {
+            margin-bottom: 20px;
+            color: #156F7A;
+        }
+
+        /* Form Styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #156F7A;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #156F7A;
+            outline: none;
+        }
+
+        button {
+            background-color: #156F7A;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #E49125;
+        }
+
+        /* Responsive Design for Tablets and Mobile */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .main-content {
+                padding: 20px;
+                margin-left: 0;
+            }
+
+            .dashboard-section {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* Mobile styles */
+            .main-content {
+                padding: 15px;
+            }
+
+            form {
+                padding: 15px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="#"><img src="{% static 'images/logo.png' %}" alt="Dynamic Prohealth Logo" class="logo"></a>
+        <span class="hamburger" onclick="toggleSidebar()">&#9776;</span>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/create-profile">Create Profile</a></li>
+                <li><a href="/service_provider_profile">Profile</a></li>
+                <li><a href="/manage-services">Manage Services</a></li>
+                <li><a href="/manage-appointments">Manage Appointments</a></li>
+                <li><a href="/manage-payments">Manage Payments</a></li>
+                <li><a href="/view-feedback">View Feedback</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="container">
+                <h1>{% if profile %}Your Service Provider Profile{% else %}Create Your Service Provider Profile{% endif %}</h1>
+
+                <!-- Display error message if any -->
+                {% if error_message %}
+                <p>{{ error_message }}</p>
+                {% endif %}
+
+                {% if profile %}
+                <!-- Display profile information -->
+                <div class="profile">
+                    {% if profile.profile_picture %}
+                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" style="width: 100px; height: auto; border-radius: 50%;">
+                    {% else %}
+                    <img src="{% static 'default-profile.png' %}" alt="Default Profile Picture" style="width: 100px; height: auto; border-radius: 50%;">
+                    {% endif %}
+                    <div class="profile-info">
+                        <p><strong>Expertise Area:</strong> {{ profile.expertise_area }}</p>
+                        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+                        <p><strong>Availability:</strong> {{ profile.availability }}</p>
+                        <p><strong>Contact Info:</strong> {{ profile.contact_info }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <!-- Display profile creation form -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="profile_picture">Profile Picture:</label>
+                    <input type="file" name="profile_picture" id="profile_picture">
+
+                    <label for="expertise_area">Expertise Area:</label>
+                    <input type="text" name="expertise_area" id="expertise_area" required>
+
+                    <label for="bio">Bio:</label>
+                    <textarea name="bio" id="bio" required></textarea>
+
+                    <label for="availability">Availability:</label>
+                    <input type="text" name="availability" id="availability" required>
+
+                    <label for="contact_info">Contact Info:</label>
+                    <input type="text" name="contact_info" id="contact_info" required>
+
+                    <button type="submit">Create Profile</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>

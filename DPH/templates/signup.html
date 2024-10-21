@@ -1,0 +1,340 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <style>
+    /* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url("{% static 'images/admin_login_background.jpg' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: white;
+    color: black; /* Change text color to black for better contrast */
+    padding: 5px 20px; /* Adjust padding as needed */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Fix the header to the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make sure it spans the full width of the viewport */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* Bottom shadow for the header */
+    z-index: 1000; /* Ensure the header is above other content */
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    max-height: auto; /* Adjust the height as needed */
+    width: 110px;
+    margin-left: 50px;
+}
+
+nav {
+    flex: 1; /* Allow the nav to take up remaining space */
+    display: flex;
+    justify-content: center; /* Center the nav items */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 15px; /* Add horizontal spacing between items */
+    display: flex;
+    align-items: center;
+}
+
+/* Base styles for navigation links */
+nav ul li a {
+    color: #156F7A;
+    text-decoration: none;
+    font-size: 16px;
+    position: relative; /* Needed for the ::after pseudo-element */
+    transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+nav ul li a:hover {
+    color: #E49125;
+    box-shadow: 1px 5px 18px rgba(233, 145, 37, 0.1); /* Orange shadow */
+}
+
+/* Underline animation */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #E49125; /* Orange underline */
+    transition: width 0.3s ease;
+}
+
+/* Expand underline on hover */
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.card {
+    border: none;
+}
+
+.box {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    background: transparent;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+    margin: 100px;
+}
+
+.box input[type="text"],
+.box input[type="password"],
+.box input[type="email"],
+.box select {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+/* Transparent background for select */
+.box select {
+    background-color: transparent; /* Set background to transparent */
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus,
+.box input[type="email"]:focus,
+.box select:focus {
+    border-color: #2ecc71;
+}
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+}
+
+.box input[type="submit"]:hover {
+    background: #2ecc71;
+}
+
+.forgot {
+    text-decoration: underline;
+}
+
+.login-link {
+    color: white;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #2ecc71;
+    text-decoration: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .box {
+        padding: 20px;
+    }
+
+    .box h1 {
+        font-size: 24px;
+    }
+
+    .box p {
+        font-size: 16px;
+    }
+
+    .box input[type="text"],
+    .box input[type="password"],
+    .box input[type="email"],
+    .box select,
+    .box input[type="submit"] {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    header {
+        padding: 5px 10px;
+    }
+
+    .logo-image {
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 15px;
+    }
+
+    .box h1 {
+        font-size: 20px;
+    }
+
+    .box p {
+        font-size: 14px;
+    }
+
+    .box input[type="text"],
+    .box input[type="password"],
+    .box input[type="email"],
+    .box select,
+    .box input[type="submit"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    header {
+        padding: 5px;
+    }
+
+    .logo-image {
+        width: 60px;
+        margin-left: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+}
+
+  </style>
+    <title>Signup</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-logo">
+            <a href="/"><img src="{% static 'images/logo.png' %}" alt="Dynamic Prohealth Logo" class="logo-image"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Signup Form -->
+    <div class="box">
+        <form method="POST">
+            {% csrf_token %}
+            <h1>Sign Up</h1>
+            <p>Please enter your <span style="color: #2ecc71;">Details</span></p>
+
+            <input type="text" placeholder="Username" name="uname" id="username">
+            <div class="username-error" id="username-error" style="color: red;"></div>
+
+            <input type="email" placeholder="Email" name="uemail">
+            <input type="password" placeholder="Password" name="upass">
+            <input type="password" placeholder="Confirm Password" name="cpass">
+
+            <label for="user_type" style="color: white;">Sign up as:</label>
+            <select name="user_type" id="user_type" class="opt1">
+                <option value="customer" class="opt">Customer</option>
+                <option value="service_provider" class="opt">Service Provider</option>
+            </select>
+
+            <input type="submit" value="Submit">
+            <p class="login-link">Already have an account? <a href="/login">Log in</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('username').addEventListener('input', function () {
+            const username = this.value;
+            if (username.length > 0) {
+                fetch(`/check-username/?username=${username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const usernameError = document.getElementById('username-error');
+                        if (data.is_taken) {
+                            usernameError.textContent = "Username is already taken. Please choose a different one.";
+                        } else {
+                            usernameError.textContent = "";
+                        }
+                    });
+            } else {
+                document.getElementById('username-error').textContent = "";
+            }
+        });
+    </script>
+</body>
+
+</html>

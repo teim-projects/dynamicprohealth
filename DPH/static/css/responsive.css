@@ -1,0 +1,283 @@
+/* General styles for responsive design */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: white;
+}
+
+/* Header */
+header {
+    background-color: white;
+    color: black;
+    padding: 5px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 110px;
+    margin-left: 50px;
+}
+
+/* Navigation Menu */
+nav {
+    flex: 1;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a {
+    color: #156F7A;
+    text-decoration: none;
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #E49125;
+    box-shadow: 1px 5px 18px rgba(233, 145, 37, 0.1);
+}
+
+/* Hamburger menu for mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: auto; /* Push toggle button to the right */
+
+}
+
+.menu-toggle span {
+    height: 3px;
+    width: 25px;
+    background: #156F7A;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 0;
+}
+
+.auth-buttons .btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #156F7A;
+    background-color: transparent;
+    border: 1px solid #156F7A;
+    font-size: 14px;
+}
+
+.auth-buttons .btn:hover {
+    background-color: #E49125;
+    color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        display: none;
+        padding: 10px 0;
+    }
+
+    nav ul li {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    nav ul li.auth-buttons {
+        flex-direction: column;
+        margin: 10px 0;
+    }
+
+    nav ul li.auth-buttons .btn {
+        width: 100%;
+        margin: 5px auto;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul {
+        padding: 20px 0;
+    }
+
+    nav ul li.auth-buttons .btn {
+        width: 90%;
+    }
+}
+
+
+
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+}
+
+
+
+/* Responsive Styles for Carousel */
+@media (max-width: 1024px) {
+    .carousel {
+        height: 700px;
+    }
+
+    .carousel-image {
+        height: 700px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 2.5em;
+    }
+
+    .carousel-caption p {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel {
+        height: 500px;
+    }
+
+    .carousel-image {
+        height: 500px;
+        margin-top: 50px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .carousel-caption p {
+        font-size: 1.2em;
+        margin-top: 20px;
+    }
+
+    .carousel-arrow {
+        font-size: 20px;
+        padding: 8px;
+    }
+
+    .carousel-arrow.left {
+        left: 5px;
+    }
+
+    .carousel-arrow.right {
+        right: 5px;
+    }
+
+    .carousel-caption {
+        top: 30%;
+        left: 28%;
+        transform: translate(-50%, -50%);
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel {
+        height: auto;
+    }
+
+    .carousel-image {
+        height: 400px;
+        margin-top: 50px;
+    }
+
+    .carousel-caption h3 {
+        font-size: 1.8em;
+        
+    }
+
+    .carousel-caption p {
+        font-size: 1em;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .carousel-arrow {
+        font-size: 18px;
+        padding: 6px;
+    }
+
+    .carousel-arrow.left {
+        left: 5px;
+    }
+
+    .carousel-arrow.right {
+        right: 5px;
+    }
+
+    .carousel-caption {
+        top: 40%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .carousel-caption .btn {
+        padding: 5px 10px;
+        font-size: 0.9em;
+    }
+}
